@@ -1,21 +1,16 @@
 import { Config } from '@stencil/core';
 
+// https://stenciljs.com/docs/config
+
 export const config: Config = {
-  namespace: 'stencil-component-starter',
+  globalStyle: 'src/global/app.css',
+  globalScript: 'src/global/app.ts',
   outputTargets: [
     {
-      type: 'dist',
-      esmLoaderPath: '../loader',
-    },
-    {
-      type: 'dist-custom-elements-bundle',
-    },
-    {
-      type: 'docs-readme',
-    },
-    {
       type: 'www',
-      serviceWorker: null, // disable service workers
-    },
-  ],
+      // comment the following line to disable service workers in production
+      serviceWorker: null,
+      baseUrl: 'https://myapp.local/'
+    }
+  ]
 };
