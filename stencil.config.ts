@@ -1,4 +1,5 @@
 import { Config } from '@stencil/core';
+import { readFileSync } from 'fs';
 
 // https://stenciljs.com/docs/config
 
@@ -12,5 +13,13 @@ export const config: Config = {
       serviceWorker: null,
       baseUrl: 'https://myapp.local/'
     }
-  ]
+  ],
+  devServer: {
+    reloadStrategy: 'hmr',
+    port: 3333,
+    https: {
+      cert: readFileSync('local.cert', 'utf8'),
+      key: readFileSync('local.key', 'utf8')
+    }
+  }
 };
