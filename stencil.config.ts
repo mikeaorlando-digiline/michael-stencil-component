@@ -4,6 +4,7 @@ import { readFileSync } from 'fs';
 // https://stenciljs.com/docs/config
 
 export const config: Config = {
+  namespace: "{{PROJECT_NAME}}",
   globalStyle: 'src/global/{{PROJECT_NAME}}.css',
   globalScript: 'src/global/{{PROJECT_NAME}}.ts',
   outputTargets: [
