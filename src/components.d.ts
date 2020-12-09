@@ -11,6 +11,7 @@ export namespace Components {
           * The first name
          */
         "first": string;
+        
         /**
           * The last name
          */
