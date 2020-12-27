@@ -1,0 +1,29 @@
+on:
+  release:
+    types: [created]
+
+name: Build and Push Component to Digiline Distribution
+
+jobs:
+  deploy:
+    name: Upload to Digiline Distribution
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+#        TODO: add stencil pinned to a specific verison
+
+#        TODO: build project with stencil
+
+      - name: Configure Digiline Distribution credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.DIGILINE_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.DIGILINE_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.DIGILINE_AWS_REGION }}
+
+      - name: Copy files to the test website with the AWS CLI
+        run: |
+          aws s3 sync . s3://${{ secrets.DIGILINE_DEPLOYMENT_BUCKET }}/${{ secrets.DIGILINE_USER_SUB }}/{{ github.repository }}/{{ github.ref }}
