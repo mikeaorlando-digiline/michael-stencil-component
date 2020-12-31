@@ -13,9 +13,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-#        TODO: add stencil pinned to a specific verison
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
 
-#        TODO: build project with stencil
+      - run: npm ci
+
+      - run: stencil build
 
       - name: Configure Digiline Distribution credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -24,6 +28,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.DIGILINE_AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.DIGILINE_AWS_REGION }}
 
-      - name: Copy files to the test website with the AWS CLI
+      - name: Copy files to Digiline Distribution
         run: |
-          aws s3 sync . s3://${{ secrets.DIGILINE_DEPLOYMENT_BUCKET }}/${{ secrets.DIGILINE_USER_SUB }}/{{ github.repository }}/{{ github.ref }}
+          aws s3 sync www/build/. s3://${{ secrets.DIGILINE_DEPLOYMENT_BUCKET }}/${{ secrets.DIGILINE_USER_SUB }}/{{ github.repository }}/{{ github.ref }}
