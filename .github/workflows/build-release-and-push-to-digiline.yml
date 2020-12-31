@@ -30,4 +30,4 @@ jobs:
 
       - name: Copy files to Digiline Distribution
         run: |
-          aws s3 sync www/build/. s3://${{ secrets.DIGILINE_DEPLOYMENT_BUCKET }}/${{ secrets.DIGILINE_USER_SUB }}/{{ github.repository }}/{{ github.ref }}
+          aws s3 sync www/build/. s3://${{ secrets.DIGILINE_DEPLOYMENT_BUCKET }}/${{ secrets.DIGILINE_USER_SUB }}/${{ github.repository }}/${{ github.ref }}
