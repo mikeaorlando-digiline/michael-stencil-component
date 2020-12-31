@@ -19,7 +19,7 @@ jobs:
 
       - run: npm ci
 
-      - run: stencil build
+      - run: npm run build
 
       - name: Configure Digiline Distribution credentials
         uses: aws-actions/configure-aws-credentials@v1
